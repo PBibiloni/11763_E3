@@ -58,7 +58,7 @@ def main():
     plt.imshow(coronal_AIP, cmap=plt.cm.get_cmap('bone'), aspect=pixel_len_mm[0]/pixel_len_mm[2])
     plt.show()
 
-    # Proyecciones MIP / AIP coronales
+    # Proyecciones MIP / AIP sagitales
     sagital_MIP = np.max(img, axis=2)
     sagital_AIP = np.mean(img, axis=2)
     plt.subplot(1, 2, 1)
