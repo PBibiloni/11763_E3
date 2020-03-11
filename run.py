@@ -58,6 +58,31 @@ def main():
     plt.imshow(coronal_AIP, cmap=plt.cm.get_cmap('bone'), aspect=pixel_len_mm[0]/pixel_len_mm[2])
     plt.show()
 
+    # Proyecciones MIP / AIP sagitales
+    sagital_MIP = np.max(img, axis=2)
+    sagital_AIP = np.mean(img, axis=2)
+    plt.subplot(1, 2, 1)
+    plt.imshow(sagital_MIP, cmap=plt.cm.get_cmap('bone'), aspect=pixel_len_mm[0]/pixel_len_mm[1])
+    plt.subplot(1, 2, 2)
+    plt.imshow(sagital_AIP, cmap=plt.cm.get_cmap('bone'), aspect=pixel_len_mm[0]/pixel_len_mm[1])
+    plt.show()
+
+    # Proyecciones MIP tras rotación en el plano axial (YZ).
+    #       Colormap config
+    img_min = np.amin(img)
+    img_max = np.amax(img)
+    cm = plt.cm.get_cmap('bone')
+    cm_min = img_min
+    cm_max = img_max
+
+    n = 5
+    for idx, alpha in enumerate(np.linspace(0, 2*np.pi*(n-1)/n, num=n)):
+        rotated_img = rotate_YZ_v2(img, alpha, background_padding_value=-1000)
+        sagital_MIP = np.amax(rotated_img, axis=2)
+        plt.subplot(1, n, idx+1), plt.imshow(sagital_MIP, cmap=cm, vmin=cm_min, vmax=cm_max,
+                                             aspect=pixel_len_mm[0]/pixel_len_mm[1])
+    plt.show()
+
 
 if __name__ == '__main__':
     main()
