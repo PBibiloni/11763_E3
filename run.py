@@ -1,6 +1,6 @@
 import pydicom
 import numpy as np
-from matplotlib import pyplot as plt, animation
+from matplotlib import pyplot as plt
 from scipy import ndimage
 
 
