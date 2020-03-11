@@ -8,7 +8,8 @@ Se plantean los siguientes objetivos:
 * Obtener las proyecciones sagitales de la imagen DICOM proporcionada:
     * MIP 
     * AIP
-* Visualizar, en modo cine, las proyecciones sagitales MIP variando el ángulo de rotación
+* Visualizar diversas proyecciones MIP tras una rotación en el plano axial.
+* Visualizar, en modo cine, las proyecciones MIP variando el ángulo de rotación.
 
 Pedro Bibiloni
 Universitat de les Illes Balears
