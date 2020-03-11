@@ -83,20 +83,6 @@ def main():
                                              aspect=pixel_len_mm[0]/pixel_len_mm[1])
     plt.show()
 
-    # Proyecciones MIP - Modo cine
-    n = 16
-    projections = []
-    for idx, alpha in enumerate(np.linspace(0, 2*np.pi*(n-1)/n, num=n)):
-        rotated_img = rotate_YZ_v2(img, alpha, background_padding_value=-1000)
-        projections.append(np.amax(rotated_img, axis=2))
-
-    fig, ax = plt.subplots()
-    animation_data = [[plt.imshow(img, animated=True, cmap=cm, vmin=cm_min, vmax=cm_max,
-                                  aspect=pixel_len_mm[0] / pixel_len_mm[1])] for img in projections]
-    animation.ArtistAnimation(fig, animation_data,
-                              interval=250, blit=True)
-    plt.show()
-
 
 if __name__ == '__main__':
     main()
