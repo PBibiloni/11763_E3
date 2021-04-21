@@ -1,3 +1,6 @@
+import os
+import time
+
 import pydicom
 import numpy as np
 from matplotlib import pyplot as plt, animation
@@ -90,13 +93,21 @@ def main():
         rotated_img = rotate_YZ_v2(img, alpha, background_padding_value=-1000)
         projections.append(np.amax(rotated_img, axis=2))
 
+
     fig, ax = plt.subplots()
     animation_data = [[plt.imshow(img, animated=True, cmap=cm, vmin=cm_min, vmax=cm_max,
                                   aspect=pixel_len_mm[0] / pixel_len_mm[1])] for img in projections]
-    animation.ArtistAnimation(fig, animation_data,
+    anim = animation.ArtistAnimation(fig, animation_data,
                               interval=250, blit=True)
     plt.show()
 
+    # Guardar cada una de las proyecciones
+    os.makedirs('results/MIP (imágenes)', exist_ok=True)
+    for idx, p in enumerate(projections):
+        plt.imshow(p, cmap=cm, vmin=cm_min, vmax=cm_max,
+                   aspect=pixel_len_mm[0] / pixel_len_mm[1])
+        plt.savefig(f'results/MIP (imágenes)/{idx}.png')
+    anim.save('results/MIP.gif')
 
 if __name__ == '__main__':
     main()
